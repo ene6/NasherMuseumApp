@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00FFFFFF"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="42dp"
+        android:shadowColor="@color/green"
+        android:shadowDx="12"
+        android:shadowDy="12"
+        android:shadowRadius="5"
+        android:text="Nasher \nStorage \nSupport"
+        android:fontFamily="@font/bernard"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="68sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/credit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="144dp"
+        android:layout_marginLeft="144dp"
+        android:layout_marginTop="672dp"
+        android:fontFamily="@font/bernard"
+        android:text="Team OCEAN 2020"
+        android:textAllCaps="false"
+        android:textColor="#6c6c6c"
+        android:textSize="36sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="36dp"
+        tools:layout_editor_absoluteX="114dp"
+        tools:layout_editor_absoluteY="320dp">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+
+            android:background="#FFFFFF"
+            android:hint="NetID" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="36dp"
+        tools:layout_editor_absoluteX="114dp"
+        tools:layout_editor_absoluteY="390dp">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+
+            android:background="#FFFFFF"
+            android:hint="Password" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Button
+        android:id="@+id/loginpage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="128dp"
+        android:layout_marginLeft="128dp"
+        android:layout_marginBottom="80dp"
+        android:fontFamily="@font/berlinsansfbregular"
+        android:text="login"
+        android:textAllCaps="false"
+        android:textSize="48sp"
+        app:backgroundTint="#6C6C6C"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="#96d607"
+        app:strokeWidth="4dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00FFFFFF"
+    tools:context=".MainActivity">
+
+
+    <TextView
+        android:id="@+id/IDLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="42dp"
+        android:text="Object ID:"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="36sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/IDInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="36dp"
+        tools:layout_editor_absoluteX="114dp"
+        tools:layout_editor_absoluteY="100dp">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+
+            android:hint="system data" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <TextView
+        android:id="@+id/ObjectNameLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="80dp"
+        android:text="Object Name:"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="36sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/IDLabel" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ObjectNameInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="36dp"
+        tools:layout_editor_absoluteX="114dp"
+        tools:layout_editor_absoluteY="230dp">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+
+            android:hint="system data" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <TextView
+        android:id="@+id/ArtistLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="80dp"
+        android:text="Artist:"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="36sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ObjectNameLabel" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ArtistInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="36dp"
+        tools:layout_editor_absoluteX="114dp"
+        tools:layout_editor_absoluteY="350dp">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+
+            android:hint="system data" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/LocationLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="80dp"
+        android:text="Location:"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="36sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ArtistLabel" />
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/LocationInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="36dp"
+        tools:layout_editor_absoluteX="114dp"
+        tools:layout_editor_absoluteY="480dp">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+
+            android:hint="system data" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="84dp"
+        android:layout_marginLeft="84dp"
+        android:text="Submit"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="36sp"
+        app:backgroundTint="#6C6C6C"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="#96d607"
+        app:strokeWidth="4dp"
+        tools:layout_editor_absoluteY="609dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

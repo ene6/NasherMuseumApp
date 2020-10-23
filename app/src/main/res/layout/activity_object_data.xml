@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00FFFFFF"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/moving"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:text="Moving"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:fontFamily="@font/berlinsansfbregular"
+        android:textSize="64sp"
+        app:backgroundTint="#6C6C6C"
+        app:layout_constraintBottom_toTopOf="@+id/returning"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="#96d607"
+        app:strokeWidth="4dp" />
+
+
+    <Button
+        android:id="@+id/returning"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginBottom="36dp"
+        android:fontFamily="@font/berlinsansfbregular"
+        android:text="Returning"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="64sp"
+        app:backgroundTint="#6C6C6C"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="#96d607"
+        app:strokeWidth="4dp" />
+
+    <TextView
+        android:id="@+id/IDLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="42dp"
+        android:fontFamily="@font/berlinsansfbregular"
+        android:text="Object ID:"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="48sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/IDText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="6dp"
+        android:fontFamily="@font/berlinsansfbregular"
+        android:text=""
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="48sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/IDLabel" />
+
+
+    <TextView
+        android:id="@+id/ObjectNameLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="54dp"
+        android:fontFamily="@font/berlinsansfbregular"
+        android:text="Object Name:"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="48sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/IDLabel" />
+
+    <TextView
+        android:id="@+id/ObjectNameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="6dp"
+        android:fontFamily="@font/berlinsansfbregular"
+        android:text=""
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="48sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ObjectNameLabel" />
+
+
+
+    <TextView
+        android:id="@+id/ArtistLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="54dp"
+        android:fontFamily="@font/berlinsansfbregular"
+        android:text="Artist:"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="48sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ObjectNameLabel" />
+
+    <TextView
+        android:id="@+id/ArtistText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="6dp"
+        android:fontFamily="@font/berlinsansfbregular"
+        android:text=""
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="48sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ArtistLabel" />
+
+    <TextView
+        android:id="@+id/LocationLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="54dp"
+        android:text="Location:"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:fontFamily="@font/berlinsansfbregular"
+        android:textSize="48sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ArtistLabel" />
+
+    <TextView
+        android:id="@+id/LocationText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="6dp"
+        android:text=""
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="48sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LocationLabel" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
