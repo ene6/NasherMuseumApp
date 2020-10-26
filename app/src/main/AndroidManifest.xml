@@ -24,7 +24,15 @@
             android:label="Search" />
         <activity
             android:name=".SubmissionActivity"
-            android:label="Submit" />
+            android:label="Submit" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
         <activity
             android:name=".ObjectDataActivity"
             android:label="Object Data">
@@ -33,11 +41,7 @@
         <activity
             android:name=".MainActivity"
             android:label="Object Scan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity
