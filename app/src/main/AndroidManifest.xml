@@ -9,33 +9,42 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
+
         <activity
             android:name=".RackContents"
             android:label="Rack Contents"></activity>
         <activity
-            android:name=".scanrack"
+            android:name=".ScanRackActivity"
             android:label="Scan Rack" />
         <activity
-            android:name=".loginpage"
+            android:name=".LoginPageActivity"
             android:label="Login"/>
         <activity
-            android:name=".Search"
+            android:name=".SearchActivity"
             android:label="Search" />
         <activity
-            android:name=".Submission"
+            android:name=".SubmissionActivity"
             android:label="Submit" />
         <activity
-            android:name=".ObjectData"
+            android:name=".ObjectDataActivity"
             android:label="Object Data">
+
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="Object Scan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".MainActivity"
-            android:label="Object Scan" />
+            android:name=".PictureCapture"
+            android:screenOrientation="fullSensor"
+            android:stateNotNeeded="true"
+            android:windowSoftInputMode="stateAlwaysHidden" />
     </application>
 
 </manifest>

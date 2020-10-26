@@ -4,16 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00FFFFFF"
+    android:background="#ffffff"
     tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/scan"
+        android:layout_width="400dp"
+        android:layout_height="200dp"
+        android:layout_marginBottom="200dp"
+
+        android:fontFamily="@font/berlinsansfbregular"
+        android:text="Scan Barcode / Image"
+        android:textAllCaps="false"
+        android:textSize="42sp"
+        app:backgroundTint="#6C6C6C"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@android:drawable/ic_menu_search"
+        app:strokeColor="#96d607"
+        app:strokeWidth="4dp" />
 
 
     <Button
         android:id="@+id/searchpage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
         android:layout_marginBottom="36dp"
         android:fontFamily="@font/berlinsansfbregular"
         android:text="Manual Search"
@@ -21,6 +37,7 @@
         android:textSize="42sp"
         app:backgroundTint="#6C6C6C"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:strokeColor="#96d607"
         app:strokeWidth="4dp" />
