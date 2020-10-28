@@ -19,18 +19,16 @@
             android:label="Scan Rack" />
         <activity
             android:name=".LoginPageActivity"
-            android:label="Login"/>
+            android:label="Login" >
+
+        </activity>
         <activity
             android:name=".SearchActivity"
             android:label="Search" />
         <activity
             android:name=".SubmissionActivity"
             android:label="Submit" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
 
@@ -42,7 +40,11 @@
         <activity
             android:name=".MainActivity"
             android:label="Object Scan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity
@@ -50,6 +52,15 @@
             android:screenOrientation="fullSensor"
             android:stateNotNeeded="true"
             android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <activity android:name=".SearchableActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable"/>
+        </activity>
+
     </application>
 
 </manifest>

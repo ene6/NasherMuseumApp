@@ -105,10 +105,10 @@ public class Painting {
 
     @Override
     public String toString() {
-        return "Object: " + paintingID +
+        return "Object: " + paintingID + " (" + title + " by " + artist + ")" +
                 " is stored at " + location +
                 ".\nIt is on " + locationType + ' ' + rack +
-                ".\tIt has has dimensions as follows\tHeight: " +height + "\tWidth: " + width +
+                ".\tIt has has dimensions as follows Height: " +height + "\tWidth: " + width +
                 "\tDepth: "+ depth;
     }
 }

@@ -13,10 +13,10 @@ public class SubmissionActivity extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.d("Bub","Hello World");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submission);
         final Button send = (Button) this.findViewById(R.id.submitBtn);
-
         send.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 new MyTask().execute("This is the email message");

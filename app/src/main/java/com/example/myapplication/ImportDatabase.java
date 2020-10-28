@@ -28,10 +28,10 @@ import java.util.Objects;
 
 public class ImportDatabase{
 
-    private HashMap<String, String[]> infoDict;
-    private HashMap<String, Painting> info;
+    private static HashMap<String, String[]> infoDict;
+    public static HashMap<String, Painting> info;
 
-    public ImportDatabase(Context context, String CSV_FILE_PATH){
+    public static void create(Context context, String CSV_FILE_PATH){
         infoDict = new HashMap<String, String[]>();
         info = new HashMap<String, Painting>();
         ArrayList<List<String>> records = new ArrayList<List<String>>();
@@ -61,7 +61,7 @@ public class ImportDatabase{
 
     }
 
-    private int findIndex(String val){ //for infoDic - vestigial
+    private static int findIndex(String val){ //for infoDic - vestigial
         for (int i = 0; i < infoDict.get("Painting ID").length; i++){
            if (infoDict.get("Painting ID")[i].equals(val))
                return i;
@@ -69,7 +69,7 @@ public class ImportDatabase{
         return -1;
     }
 
-    public ArrayList<String> searchID(String keyword){ // only for Painting ID, Rack, Location type, Artist, Title
+    public static ArrayList<String> searchID(String keyword){ // only for Painting ID, Rack, Location type, Artist, Title
         ArrayList<String> returnVal = new ArrayList<String>();
         for (String key: info.keySet()){
             if (info.get(key).containsPaintingID(keyword.trim()))
@@ -78,7 +78,7 @@ public class ImportDatabase{
         return returnVal;
     }
 
-    public ArrayList<String> searchLocation(String rackType, boolean type, boolean num, String rack){
+    public static ArrayList<String> searchLocation(String rackType, boolean type, boolean num, String rack){
         ArrayList<String> returnVal = new ArrayList<String>();
         if (type) {
             for (String key : info.keySet()) {
@@ -101,13 +101,13 @@ public class ImportDatabase{
         return returnVal;
     }
 
-    public ArrayList<String> searchLocation(boolean rackType, String val){
+    public static ArrayList<String> searchLocation(boolean rackType, String val){
         if (rackType)
             return searchLocation(val, true, false, "None");
         return searchLocation("None", false, true, val);
     }
 
-    public ArrayList<String> searchTitle(String keyword){
+    public static ArrayList<String> searchTitle(String keyword){
         ArrayList<String> returnVal = new ArrayList<String>();
         for (String key: info.keySet()){
             if (info.get(key).containsTitle(keyword.trim()))
@@ -116,7 +116,7 @@ public class ImportDatabase{
         return returnVal;
     }
 
-    public ArrayList<String> searchArtist(String keyword){
+    public static ArrayList<String> searchArtist(String keyword){
         ArrayList<String> returnVal = new ArrayList<String>();
         for (String key: info.keySet()){
             if (info.get(key).containsArtist(keyword.trim()))
@@ -125,7 +125,7 @@ public class ImportDatabase{
         return returnVal;
     }
 
-    public ArrayList<String> search(String keyword){
+    public static ArrayList<String> search(String keyword){
         ArrayList<String> returnVal = new ArrayList<String>();
         returnVal.addAll(searchID(keyword));
         returnVal.addAll(searchTitle(keyword));
