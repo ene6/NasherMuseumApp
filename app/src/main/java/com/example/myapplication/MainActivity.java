@@ -3,9 +3,16 @@ package com.example.myapplication;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.nfc.NdefMessage;
+import android.nfc.NdefRecord;
+import android.nfc.NfcAdapter;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,21 +21,22 @@ import android.widget.Toast;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.io.UnsupportedEncodingException;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Button button ;
-    TextView paintingID;
+    Button button;
+    NfcAdapter nfcAdapter;
+    TextView txtTagContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        //paintingID = (TextView) findViewById(R.id.textView);
         button = findViewById(R.id.scan);
         button.setOnClickListener(this);
-
+        nfcAdapter = NfcAdapter.getDefaultAdapter(this);
     }
 
     @Override
@@ -40,7 +48,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.setCaptureActivity(PictureCapture.class);
         integrator.setOrientationLocked(false);
-
         integrator.setDesiredBarcodeFormats(IntentIntegrator.DATA_MATRIX_TYPES);
         integrator.setPrompt("Scanning");
         integrator.initiateScan();
@@ -51,25 +58,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        //paintingID.setText(result.getContents());
-
         if (result != null){
             if (result.getContents() != null){
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-
                 builder.setMessage(result.getContents());
-                builder.setTitle("Scanning Result");
-                builder.setPositiveButton("Scan Again", new DialogInterface.OnClickListener() {
+                builder.setTitle("Scanning Result:");
+                builder.setPositiveButton("Rescan", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         scanID();
                     }
-                }).setNegativeButton("Finish", new DialogInterface.OnClickListener() {
+                }).setNegativeButton("Continue", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        finish();
+                        Intent ObjectDataIntent = new Intent(MainActivity.this, ObjectDataActivity.class);
+                        ObjectDataIntent.putExtra("result", result.getContents());
+                        MainActivity.this.startActivity(ObjectDataIntent);
                     }
                 });
                 AlertDialog dialog = builder.create();
@@ -83,5 +89,95 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Intent intent = new Intent(this, MainActivity.class).addFlags(Intent.FLAG_RECEIVER_REPLACE_PENDING);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+        IntentFilter[] intentFilters = new IntentFilter[]{};
+
+        nfcAdapter.enableForegroundDispatch(this, pendingIntent, intentFilters, null);
+    }
+
+    @Override
+    protected void onPause() {
+
+        nfcAdapter.disableForegroundDispatch(this);
+        super.onPause();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+
+        if (intent.hasExtra(NfcAdapter.EXTRA_TAG)) {
+            //Toast.makeText(this, "NfcIntent!", Toast.LENGTH_SHORT).show();
+
+            Parcelable[] parcelables = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
+
+            if(parcelables != null && parcelables.length > 0)
+            {
+                readTextFromMessage((NdefMessage) parcelables[0]);
+            }else{
+                Toast.makeText(this, "No NDEF messages found!", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+    }
+
+    private void readTextFromMessage(NdefMessage ndefMessage) {
+
+        NdefRecord[] ndefRecords = ndefMessage.getRecords();
+
+        if(ndefRecords != null && ndefRecords.length>0){
+
+            NdefRecord ndefRecord = ndefRecords[0];
+
+            String tagContent = getTextFromNdefRecord(ndefRecord);
+
+            Toast.makeText(this, tagContent, Toast.LENGTH_SHORT).show();
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            builder.setMessage(tagContent);
+            builder.setTitle("Scanning Result:");
+            builder.setPositiveButton("Rescan", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                }
+            }).setNegativeButton("Continue", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Intent ObjectDataIntent = new Intent(MainActivity.this, ObjectDataActivity.class);
+                    ObjectDataIntent.putExtra("result", tagContent);
+                    MainActivity.this.startActivity(ObjectDataIntent);
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
+        }else
+        {
+            Toast.makeText(this, "No NDEF records found!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public String getTextFromNdefRecord(NdefRecord ndefRecord)
+    {
+        String tagContent = null;
+        try {
+            byte[] payload = ndefRecord.getPayload();
+            String textEncoding = ((payload[0] & 128) == 0) ? "UTF-8" : "UTF-16";
+            int languageSize = payload[0] & 0063;
+            tagContent = new String(payload, languageSize + 1,
+                    payload.length - languageSize - 1, textEncoding);
+        } catch (UnsupportedEncodingException e) {
+            Log.e("getTextFromNdefRecord", e.getMessage(), e);
+        }
+        return tagContent;
+    }
 
 }

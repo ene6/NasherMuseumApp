@@ -24,19 +24,20 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/IDInput"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="36dp"
-        tools:layout_editor_absoluteX="114dp"
-        tools:layout_editor_absoluteY="100dp">
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/IDLabel">
 
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="350dp"
             android:layout_height="wrap_content"
-
             android:hint="system data" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -57,13 +58,15 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ObjectNameInput"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="36dp"
-        tools:layout_editor_absoluteX="114dp"
-        tools:layout_editor_absoluteY="230dp">
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ObjectNameLabel">
 
 
         <com.google.android.material.textfield.TextInputEditText
@@ -72,7 +75,6 @@
 
             android:hint="system data" />
     </com.google.android.material.textfield.TextInputLayout>
-
 
 
     <TextView
@@ -91,13 +93,16 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ArtistInput"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="36dp"
-        tools:layout_editor_absoluteX="114dp"
-        tools:layout_editor_absoluteY="350dp">
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ArtistLabel">
 
 
         <com.google.android.material.textfield.TextInputEditText
@@ -122,16 +127,17 @@
         app:layout_constraintTop_toBottomOf="@+id/ArtistLabel" />
 
 
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/LocationInput"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="36dp"
-        tools:layout_editor_absoluteX="114dp"
-        tools:layout_editor_absoluteY="480dp">
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LocationLabel">
 
 
         <com.google.android.material.textfield.TextInputEditText
@@ -145,16 +151,16 @@
         android:id="@+id/submitBtn"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
-        android:layout_marginLeft="84dp"
+        android:layout_marginTop="72dp"
         android:text="Submit"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
         android:textSize="36sp"
         app:backgroundTint="#6C6C6C"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LocationInput"
         app:strokeColor="#96d607"
-        app:strokeWidth="4dp"
-        tools:layout_editor_absoluteY="609dp" />
+        app:strokeWidth="4dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
