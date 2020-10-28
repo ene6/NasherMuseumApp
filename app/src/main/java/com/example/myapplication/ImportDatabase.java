@@ -61,7 +61,7 @@ public class ImportDatabase{
 
     }
 
-    private int findIndex(String val){ //for infoDic
+    private int findIndex(String val){ //for infoDic - vestigial
         for (int i = 0; i < infoDict.get("Painting ID").length; i++){
            if (infoDict.get("Painting ID")[i].equals(val))
                return i;
@@ -78,23 +78,33 @@ public class ImportDatabase{
         return returnVal;
     }
 
-    public ArrayList<String> searchLocation(String rackType, String rack){
+    public ArrayList<String> searchLocation(String rackType, boolean type, boolean num, String rack){
         ArrayList<String> returnVal = new ArrayList<String>();
-        for (String key: info.keySet()){
-            if (info.get(key).isLocationType(rackType.toLowerCase().trim())){
-                if (rack.equals("None"))
-                    returnVal.add(key);
-                else{
-                    if (info.get(key).isRack(rack.toLowerCase().trim()))
+        if (type) {
+            for (String key : info.keySet()) {
+                if (info.get(key).isLocationType(rackType.toLowerCase().trim())) {
+                    if (rack.equals("None"))
                         returnVal.add(key);
+                    else {
+                        if (info.get(key).isRack(rack.toLowerCase().trim()))
+                            returnVal.add(key);
+                    }
                 }
+            }
+        }
+        else {
+            for (String key : info.keySet()){
+                if (info.get(key).isRack(rack.toLowerCase().trim()))
+                    returnVal.add(key);
             }
         }
         return returnVal;
     }
 
-    public ArrayList<String> searchLocation(String rackType){
-        return searchLocation(rackType, "None");
+    public ArrayList<String> searchLocation(boolean rackType, String val){
+        if (rackType)
+            return searchLocation(val, true, false, "None");
+        return searchLocation("None", false, true, val);
     }
 
     public ArrayList<String> searchTitle(String keyword){
@@ -112,6 +122,33 @@ public class ImportDatabase{
             if (info.get(key).containsArtist(keyword.trim()))
                 returnVal.add(key);
         }
+        return returnVal;
+    }
+
+    public ArrayList<String> search(String keyword){
+        ArrayList<String> returnVal = new ArrayList<String>();
+        returnVal.addAll(searchID(keyword));
+        returnVal.addAll(searchTitle(keyword));
+        returnVal.addAll(searchArtist(keyword));
+
+        if (keyword.toLowerCase().contains("screen")){
+            for (int i = 0; i < keyword.split(" ").length; i++){
+                if (keyword.split(" ")[i].toLowerCase().contains("screen")){
+                    try {
+                        returnVal.addAll(searchLocation(keyword.split(" ")[i],true,true,keyword.split(" ")[i+1]));
+                    }
+                    catch (IndexOutOfBoundsException e){
+                        returnVal.addAll(searchLocation(true,keyword.split(" ")[i]));
+                    }
+                }
+            }
+        }
+        else{
+            for (String item: keyword.split(" ")){
+                returnVal.addAll(searchLocation(false,item));
+            }
+        }
+
         return returnVal;
     }
 
