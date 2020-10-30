@@ -47,7 +47,7 @@ public class SubmissionActivity extends Activity {
                 sender.sendMail("This is Subject",
                         message,
                         "nasherstorage",
-                        "chrisjknotek@gmail.com");
+                        "chrisknoteksoccer@gmail.com");
                 Log.i("Send Mail", "Email Sent");
             } catch (Exception e) {
                 Log.e("SendMail", e.getMessage(), e);
