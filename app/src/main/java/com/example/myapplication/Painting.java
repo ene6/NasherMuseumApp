@@ -114,6 +114,13 @@ public class Painting {
 }
 
 /*
-ImportDatabase nasher = new ImportDatabase(this,"nasher_clean_info.csv");
-Log.d("Testing", nasher.searchLocation("Screen","7A").toString());
+
+ImportDatabase.create(this,"nasher_clean_info.csv")
+ImportDatabase.info.get(--paintinID--).getTitle();
+
+searching for everything in a rack:
+
+ImportDatabase.searchLocation(false,--stringwithrack--);
+ImportDatabase.search(--keyword as a string--);
+
         */

@@ -30,11 +30,14 @@ public class ImportDatabase{
 
     private static HashMap<String, String[]> infoDict;
     public static HashMap<String, Painting> info;
+    public static HashMap<String, List<String>> infoList;
 
     public static void create(Context context, String CSV_FILE_PATH){
         infoDict = new HashMap<String, String[]>();
         info = new HashMap<String, Painting>();
+        infoList = new HashMap<String, List<String>>();
         ArrayList<List<String>> records = new ArrayList<List<String>>();
+
         try (CSVReader csvReader = new CSVReader(new InputStreamReader(context.getAssets().open(CSV_FILE_PATH)))) {
             String[] values;
             while ((values = csvReader.readNext()) != null) {
@@ -47,7 +50,9 @@ public class ImportDatabase{
                     vals[j] = (String) records.get(i).toArray()[a[j]];
                 Log.d("help", new Painting((String)records.get(i).toArray()[0],vals).toString());
                 infoDict.put((String)records.get(i).toArray()[0], vals);
+                infoList.put((String)records.get(i).toArray()[0], records.get(i));
                 info.put((String)records.get(i).toArray()[0], new Painting((String)records.get(i).toArray()[0],vals));
+
 
             }
             //for (int i = 0 ; i < records.toArray().length)
@@ -59,6 +64,10 @@ public class ImportDatabase{
             Log.d("Output", String.valueOf(e));
         }
 
+    }
+
+    public static HashMap<String, List<String>> forList(){
+        return infoList;
     }
 
     private static int findIndex(String val){ //for infoDic - vestigial

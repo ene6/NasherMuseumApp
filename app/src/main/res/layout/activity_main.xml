@@ -12,7 +12,7 @@
         android:layout_width="400dp"
         android:layout_height="200dp"
         android:layout_marginBottom="200dp"
-
+        android:drawableTop="@android:drawable/ic_menu_search"
         android:fontFamily="@font/berlinsansfbregular"
         android:text="Scan Barcode / Image"
         android:textAllCaps="false"
@@ -21,13 +21,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@android:drawable/ic_menu_search"
         app:strokeColor="#96d607"
         app:strokeWidth="4dp" />
 
 
     <Button
-        android:id="@+id/searchpage"
+        android:id="@+id/searchPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="36dp"
@@ -41,5 +40,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:strokeColor="#96d607"
         app:strokeWidth="4dp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="85dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/nasher_logo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

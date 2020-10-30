@@ -6,22 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".SearchActivity">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/searchbar"
+    <SearchView
+        android:id="@+id/searchBar"
+        android:queryHint="Search:"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="36dp"
-        tools:layout_editor_absoluteX="114dp"
-        tools:layout_editor_absoluteY="320dp">
+        android:iconifiedByDefault="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
+    </SearchView>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
+    <ExpandableListView
+        android:id="@+id/expandableListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="32dp"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="0.5dp"
+        android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
+        app:layout_constraintTop_toBottomOf="@+id/searchBar"
+        tools:layout_editor_absoluteX="0dp" />
 
-            android:background="#FFFFFF"
-            android:hint="Search" />
-    </com.google.android.material.textfield.TextInputLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

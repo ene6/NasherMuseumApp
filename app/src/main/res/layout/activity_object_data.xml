@@ -59,17 +59,20 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/IDText"
-        android:layout_width="wrap_content"
+        android:id="@+id/tvID"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="6dp"
-        android:fontFamily="@font/berlinsansfbregular"
-        android:text=""
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:fontFamily="sans-serif"
+        android:text="Painting ID"
         android:textAllCaps="false"
-        android:textColor="#000000"
-        android:textSize="48sp"
+        android:textColor="#6C6C6C"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/IDLabel" />
 
@@ -90,17 +93,20 @@
         app:layout_constraintTop_toBottomOf="@+id/IDLabel" />
 
     <TextView
-        android:id="@+id/ObjectNameText"
-        android:layout_width="wrap_content"
+        android:id="@+id/tvName"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="6dp"
-        android:fontFamily="@font/berlinsansfbregular"
-        android:text=""
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:fontFamily="sans-serif"
+        android:text="Painting Name"
         android:textAllCaps="false"
-        android:textColor="#000000"
-        android:textSize="48sp"
+        android:textColor="#6C6C6C"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ObjectNameLabel" />
 
@@ -122,17 +128,20 @@
         app:layout_constraintTop_toBottomOf="@+id/ObjectNameLabel" />
 
     <TextView
-        android:id="@+id/ArtistText"
-        android:layout_width="wrap_content"
+        android:id="@+id/tvArtist"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="6dp"
-        android:fontFamily="@font/berlinsansfbregular"
-        android:text=""
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:fontFamily="sans-serif"
+        android:text="Artist"
         android:textAllCaps="false"
-        android:textColor="#000000"
-        android:textSize="48sp"
+        android:textColor="#6C6C6C"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ArtistLabel" />
 
@@ -152,16 +161,19 @@
         app:layout_constraintTop_toBottomOf="@+id/ArtistLabel" />
 
     <TextView
-        android:id="@+id/LocationText"
-        android:layout_width="wrap_content"
+        android:id="@+id/tvLocation"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="6dp"
-        android:text=""
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:text="Location"
         android:textAllCaps="false"
-        android:textColor="#000000"
-        android:textSize="48sp"
+        android:textColor="#6C6C6C"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/LocationLabel" />
 

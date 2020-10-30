@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,26 +24,44 @@ import com.google.zxing.integration.android.IntentResult;
 
 import java.io.UnsupportedEncodingException;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+import static android.view.Window.FEATURE_NO_TITLE;
 
-    Button button;
+public class MainActivity extends AppCompatActivity{
+
+    Button scanButton;
+    Button searchButton;
     NfcAdapter nfcAdapter;
     TextView txtTagContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        this.requestWindowFeature(FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().setDisplayShowHomeEnabled(false);
 
-        button = findViewById(R.id.scan);
-        button.setOnClickListener(this);
+        scanButton = findViewById(R.id.scan);
+        searchButton = findViewById(R.id.searchPage);
+
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+
+        scanButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                scanID();
+            }
+        });
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent searchIntent = new Intent(MainActivity.this, SearchActivity.class);
+                MainActivity.this.startActivity(searchIntent);
+            }
+        });
+
     }
 
-    @Override
-    public void onClick(View view) {
-        scanID();
-    }
 
     private void scanID() {
         IntentIntegrator integrator = new IntentIntegrator(this);
@@ -73,9 +92,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }).setNegativeButton("Continue", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Intent ObjectDataIntent = new Intent(MainActivity.this, ObjectDataActivity.class);
-                        ObjectDataIntent.putExtra("result", result.getContents());
-                        MainActivity.this.startActivity(ObjectDataIntent);
+                        if (result.getContents().contains("."))
+                        {
+                            Intent PaintingIntent = new Intent(MainActivity.this, ObjectDataActivity.class);
+                            PaintingIntent.putExtra("result", result.getContents());
+                            MainActivity.this.startActivity(PaintingIntent);
+                        }
+                        else
+                        {
+                            Intent RackIntent = new Intent(MainActivity.this, RackContentsActivity.class);
+                            RackIntent.putExtra("result", result.getContents());
+                            MainActivity.this.startActivity(RackIntent);
+                        }
+
+
+
                     }
                 });
                 AlertDialog dialog = builder.create();
