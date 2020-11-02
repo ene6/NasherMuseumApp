@@ -42,12 +42,10 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
                 .get(expandedListPosition);
     }
 
-
     @Override
     public long getChildId(int listPosition, int expandedListPosition) {
         return expandedListPosition;
     }
-
 
     @Override
     public View getChildView(int listPosition, final int expandedListPosition,

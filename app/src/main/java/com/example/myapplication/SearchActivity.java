@@ -33,7 +33,6 @@ public class SearchActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
@@ -48,7 +47,6 @@ public class SearchActivity extends AppCompatActivity implements
 
         Intent intent = getIntent();
         final String rackID = intent.getStringExtra("rackID");
-
 
 
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));

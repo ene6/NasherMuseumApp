@@ -48,7 +48,7 @@ public class ImportDatabase{
                 String [] vals = new String [a.length];
                 for (int j = 0 ; j < vals.length; j++)
                     vals[j] = (String) records.get(i).toArray()[a[j]];
-                Log.d("help", new Painting((String)records.get(i).toArray()[0],vals).toString());
+                //Log.d("help", new Painting((String)records.get(i).toArray()[0],vals).toString());
                 infoDict.put((String)records.get(i).toArray()[0], vals);
                 infoList.put((String)records.get(i).toArray()[0], records.get(i));
                 info.put((String)records.get(i).toArray()[0], new Painting((String)records.get(i).toArray()[0],vals));
