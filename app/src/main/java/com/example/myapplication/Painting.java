@@ -78,7 +78,9 @@ public class Painting {
     }
 
     public boolean isLocationType(String locationType){
-        return locationType.trim().toLowerCase().equals(this.locationType.trim().toLowerCase());
+        if (this.locationType.trim().toLowerCase().contains("screen"))
+            return locationType.trim().toLowerCase().equals(this.locationType.trim().toLowerCase());
+        return this.locationType.trim().toLowerCase().contains(locationType.trim().toLowerCase());
     }
 
     public boolean isRack(String rack){
@@ -101,6 +103,14 @@ public class Painting {
 
     public boolean containsTitle(String title){
         return this.title.trim().toLowerCase().contains(title.trim().toLowerCase());
+    }
+
+    public void changeLocationType (String locationType){
+        this.locationType = locationType;
+    }
+
+    public void changeRack (String rack){
+        this.rack = rack;
     }
 
     @Override
