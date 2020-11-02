@@ -3,6 +3,7 @@ package com.example.myapplication;
 import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,11 +15,13 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class SearchActivity extends Activity implements
+public class SearchActivity extends AppCompatActivity implements
         SearchView.OnQueryTextListener, SearchView.OnCloseListener {
 
     private ExpandableListView expandableListView;
@@ -29,7 +32,7 @@ public class SearchActivity extends Activity implements
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ImportDatabase.create(this, "nasher_clean_info.csv");
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
@@ -41,8 +44,15 @@ public class SearchActivity extends Activity implements
         
         searchView = (SearchView) findViewById(R.id.searchBar);
 
+        searchView.setIconifiedByDefault(false);
+
+        Intent intent = getIntent();
+        final String rackID = intent.getStringExtra("rackID");
+
+
+
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        searchView.setIconifiedByDefault(true);
+
         searchView.setOnQueryTextListener(this);
         searchView.setOnCloseListener(this);
 
@@ -50,8 +60,14 @@ public class SearchActivity extends Activity implements
         expandableListAdapter = new CustomExpandableListAdapter(this, expandableListTitle, expandableListDetail);
         expandableListView.setAdapter(expandableListAdapter);
 
-        //expandAll();
+        if (rackID != null && !rackID.isEmpty())
+        {
+            searchView.setQuery(rackID, true);
+        }
 
+
+        //expandAll();
+        /*
         expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
 
             @Override
@@ -71,7 +87,7 @@ public class SearchActivity extends Activity implements
                         Toast.LENGTH_SHORT).show();
 
             }
-        });
+        }); */
 
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
@@ -85,6 +101,13 @@ public class SearchActivity extends Activity implements
                                 expandableListTitle.get(groupPosition)).get(
                                 childPosition), Toast.LENGTH_SHORT
                 ).show();
+
+                Intent SubmissionIntent = new Intent(SearchActivity.this, SubmissionActivity.class);
+                SubmissionIntent.putExtra("paintingID",expandableListTitle.get(groupPosition));
+                SearchActivity.this.startActivity(SubmissionIntent);
+
+
+
                 return false;
             }
         });
@@ -106,7 +129,7 @@ public class SearchActivity extends Activity implements
     @Override
     public boolean onClose() {
         expandableListAdapter.filterData("");
-        expandAll();
+        //expandAll();
         return false;
     }
 
@@ -120,8 +143,9 @@ public class SearchActivity extends Activity implements
     @Override
     public boolean onQueryTextSubmit(String query) {
         expandableListAdapter.filterData(query);
+        //searchView.setQuery(query, false);
         expandAll();
-        return false;
+        return true;
     }
 }
 /*

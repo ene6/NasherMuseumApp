@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/moving"
+        android:id="@+id/btMoving"
         android:layout_width="380dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -19,14 +19,14 @@
         android:fontFamily="@font/berlinsansfbregular"
         android:textSize="64sp"
         app:backgroundTint="#6C6C6C"
-        app:layout_constraintBottom_toTopOf="@+id/returning"
+        app:layout_constraintBottom_toTopOf="@+id/btReturning"
         app:layout_constraintStart_toStartOf="parent"
         app:strokeColor="#96d607"
         app:strokeWidth="4dp" />
 
 
     <Button
-        android:id="@+id/returning"
+        android:id="@+id/btReturning"
         android:layout_width="380dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"

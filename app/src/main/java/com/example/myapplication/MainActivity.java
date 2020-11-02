@@ -31,20 +31,26 @@ public class MainActivity extends AppCompatActivity{
     Button scanButton;
     Button searchButton;
     NfcAdapter nfcAdapter;
-    TextView txtTagContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        this.requestWindowFeature(FEATURE_NO_TITLE);
+        //Database initialization
+        ImportDatabase.create(this, "nasher_clean_info.csv");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Tries to disable the title bar. currently doesn't work lol
         getSupportActionBar().setDisplayShowHomeEnabled(false);
 
+        //Connect button variable to xml
         scanButton = findViewById(R.id.scan);
         searchButton = findViewById(R.id.searchPage);
 
+        //Nfc Adapter
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
 
+        //Scan button that brings up the scanning activity
         scanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,6 +58,7 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
+        //Search button listener that goes to the search activity
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,10 +66,9 @@ public class MainActivity extends AppCompatActivity{
                 MainActivity.this.startActivity(searchIntent);
             }
         });
-
     }
 
-
+    //Starts scanning page
     private void scanID() {
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.setCaptureActivity(PictureCapture.class);
@@ -72,10 +78,9 @@ public class MainActivity extends AppCompatActivity{
         integrator.initiateScan();
     }
 
-
+    //Gets the result of the scanning page
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null){
             if (result.getContents() != null){
@@ -100,12 +105,10 @@ public class MainActivity extends AppCompatActivity{
                         }
                         else
                         {
-                            Intent RackIntent = new Intent(MainActivity.this, RackContentsActivity.class);
-                            RackIntent.putExtra("result", result.getContents());
+                            Intent RackIntent = new Intent(MainActivity.this, SearchActivity.class);
+                            RackIntent.putExtra("rackID", result.getContents());
                             MainActivity.this.startActivity(RackIntent);
                         }
-
-
 
                     }
                 });
@@ -120,6 +123,7 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
+    //NFC commands for resuming if the program is interrupted
     @Override
     protected void onResume() {
         super.onResume();
@@ -132,12 +136,14 @@ public class MainActivity extends AppCompatActivity{
         nfcAdapter.enableForegroundDispatch(this, pendingIntent, intentFilters, null);
     }
 
+    //NFC commands for pausing if the program is interrupted
     @Override
     protected void onPause() {
 
         nfcAdapter.disableForegroundDispatch(this);
         super.onPause();
     }
+
 
     @Override
     protected void onNewIntent(Intent intent) {
@@ -152,12 +158,13 @@ public class MainActivity extends AppCompatActivity{
             {
                 readTextFromMessage((NdefMessage) parcelables[0]);
             }else{
-                Toast.makeText(this, "No NDEF messages found!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Empty Tag? No text found", Toast.LENGTH_SHORT).show();
             }
 
         }
     }
 
+    //Reads the text from the nfc intent
     private void readTextFromMessage(NdefMessage ndefMessage) {
 
         NdefRecord[] ndefRecords = ndefMessage.getRecords();
@@ -168,7 +175,7 @@ public class MainActivity extends AppCompatActivity{
 
             String tagContent = getTextFromNdefRecord(ndefRecord);
 
-            Toast.makeText(this, tagContent, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, tagContent, Toast.LENGTH_SHORT).show();
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -196,6 +203,7 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
+    //Parses the string from the ndef record
     public String getTextFromNdefRecord(NdefRecord ndefRecord)
     {
         String tagContent = null;

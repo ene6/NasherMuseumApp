@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:layout_editor_absoluteX="13dp"
+    tools:layout_editor_absoluteY="23dp"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#00FFFFFF"
@@ -22,6 +29,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/locationLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="90dp"
+        android:text="New Location:"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="36sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LocationLabel" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/IDInput"
         android:layout_width="wrap_content"
@@ -36,9 +57,12 @@
 
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etObjectID"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:hint="system data" />
+
+            android:maxHeight="85dp"
+            android:paddingTop="12dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -48,7 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="90dp"
         android:text="Object Name:"
         android:textAllCaps="false"
         android:textColor="#000000"
@@ -70,10 +94,12 @@
 
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etName"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
+            android:maxHeight="85dp"
 
-            android:hint="system data" />
+            android:paddingTop="12dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -83,7 +109,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="90dp"
         android:text="Artist:"
         android:textAllCaps="false"
         android:textColor="#000000"
@@ -106,10 +132,12 @@
 
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etArtist"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
+            android:maxHeight="85dp"
 
-            android:hint="system data" />
+            android:paddingTop="12dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -118,8 +146,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="80dp"
-        android:text="Location:"
+        android:layout_marginTop="90dp"
+        android:text="Old Location:"
         android:textAllCaps="false"
         android:textColor="#000000"
         android:textSize="36sp"
@@ -128,7 +156,7 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/LocationInput"
+        android:id="@+id/OldLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -141,17 +169,39 @@
 
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etOldLocation"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
+            android:maxHeight="85dp"
+            android:paddingTop="12dp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-            android:hint="system data" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/NewLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/locationLabel">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etNewLocation"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:maxHeight="85dp"
+            android:paddingTop="12dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/submitBtn"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="64dp"
         android:text="Submit"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
@@ -159,8 +209,14 @@
         app:backgroundTint="#6C6C6C"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/LocationInput"
+        app:layout_constraintTop_toBottomOf="@+id/NewLocation"
         app:strokeColor="#96d607"
         app:strokeWidth="4dp" />
 
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

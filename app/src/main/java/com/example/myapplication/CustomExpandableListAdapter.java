@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
 
-
+    //Variable initialization
     private Context context;
     private List<String> expandableListTitle;
     private HashMap<String, List<String>> expandableListDetail;
@@ -26,12 +26,14 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
 
     public CustomExpandableListAdapter(Context context, List<String> expandableListTitle,
                                        HashMap<String, List<String>> expandableListDetail) {
+        //Constructors
         this.context = context;
         this.expandableListTitle = expandableListTitle;
         this.expandableListDetail = expandableListDetail;
+
+        //Copies the list for query display
         originalList = new ArrayList<String>();
         originalList.addAll(expandableListTitle);
-
     }
 
     @Override
@@ -40,10 +42,12 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
                 .get(expandedListPosition);
     }
 
+
     @Override
     public long getChildId(int listPosition, int expandedListPosition) {
         return expandedListPosition;
     }
+
 
     @Override
     public View getChildView(int listPosition, final int expandedListPosition,
