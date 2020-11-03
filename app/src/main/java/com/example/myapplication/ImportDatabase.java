@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.Log;
 
 import java.io.FileNotFoundException;
@@ -159,6 +160,12 @@ public class ImportDatabase{
         }
 
         return returnVal;
+    }
+
+    public static void changeLoc (String paintingID, String newLock){
+        String [] type_rack = info.get(paintingID).changeLoc(newLock);
+        infoList.get(paintingID).set(2,type_rack[0]);
+        infoList.get(paintingID).set(3,type_rack[1]);
     }
 
 

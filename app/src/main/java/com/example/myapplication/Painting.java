@@ -2,6 +2,8 @@ package com.example.myapplication;
 
 import android.util.Log;
 
+import java.lang.reflect.Array;
+
 public class Painting {
     private String paintingID;
     private String location;
@@ -84,9 +86,9 @@ public class Painting {
     }
 
     public boolean isRack(String rack){
-        try{
+        try {
             Integer.parseInt(rack);
-            if (rack.length() <2)
+            if (rack.length() < 2)
                 rack = '0'+rack;
         }
         catch (NumberFormatException E){
@@ -111,6 +113,50 @@ public class Painting {
 
     public void changeRack (String rack){
         this.rack = rack;
+    }
+
+    public String[] changeLoc (String newLoc) {
+        String[] returnVal = new String[2];
+        if (newLoc.toLowerCase().trim().contains("wall")){
+            changeLocationType("Wall Screen");
+            returnVal[0] = "Wall Screen";
+            for (String word: newLoc.split(" ")){
+                try{
+                    int a = Integer.parseInt(word);
+                    changeRack(word);
+                    returnVal[1] = word;
+                    return returnVal;
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+            }
+            changeRack("None");
+            returnVal[1] = "None";
+            return returnVal;
+        }
+        for (String word: newLoc.trim().split(" ")){
+            try {
+                int a = Integer.parseInt(word);
+                changeLocationType("Wall Screen");
+                returnVal[0] = "Wall Screen";
+                changeRack(word);
+                returnVal[1] = word;
+            } catch (NumberFormatException e) {
+                try{
+                    int b = Integer.parseInt(word.substring(0,word.length()-1));
+                    changeLocationType("Screen");
+                    returnVal[0] = "Screen";
+                    changeRack(word);
+                    returnVal[1] = word;
+                } catch (NumberFormatException f) {
+                    changeLocationType(newLoc);
+                    returnVal[0] = newLoc;
+                    returnVal[1] = "None";
+                }
+
+            }
+        }
+        return returnVal;
     }
 
     @Override
