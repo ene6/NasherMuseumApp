@@ -80,8 +80,6 @@ public class Painting {
     }
 
     public boolean isLocationType(String locationType){
-        if (this.locationType.trim().toLowerCase().contains("screen"))
-            return locationType.trim().toLowerCase().equals(this.locationType.trim().toLowerCase());
         return this.locationType.trim().toLowerCase().contains(locationType.trim().toLowerCase());
     }
 
@@ -151,21 +149,32 @@ public class Painting {
                 } catch (NumberFormatException f) {
                     changeLocationType(newLoc);
                     returnVal[0] = newLoc;
+                    changeRack("None");
                     returnVal[1] = "None";
                 }
 
             }
         }
+
+        updateLocation();
         return returnVal;
+    }
+
+    private void updateLocation(){
+        if (this.rack == "None"){
+            this.location = this.locationType;
+            return;
+        }
+        this.location = "Nasher Museum Building, Nasher Painting Storage Room, " + this.locationType + ", " + this.rack;
     }
 
     @Override
     public String toString() {
-        return "Object: " + paintingID + " (" + title + " by " + artist + ")" +
-                " is stored at " + location +
-                ".\nIt is on " + locationType + ' ' + rack +
-                ".\tIt has has dimensions as follows Height: " +height + "\tWidth: " + width +
-                "\tDepth: "+ depth;
+        return "Object: " + this.paintingID + " (" + this.title + " by " + this.artist + ")" +
+                " is stored at " + this.location +
+                ".\nIt is on " + this.locationType + ' ' + this.rack +
+                ".\tIt has has dimensions as follows Height: " + this.height + "\tWidth: " + this.width +
+                "\tDepth: "+ this.depth;
     }
 }
 
