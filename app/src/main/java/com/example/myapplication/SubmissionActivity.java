@@ -47,8 +47,10 @@ public class SubmissionActivity extends Activity {
                 Toast.makeText(getApplicationContext(),
                         "Email Sent!",
                         Toast.LENGTH_LONG).show();
-
+                ImportDatabase.changeLoc(paintingID, etNewLocation.getText().toString());
                 new MyTask().execute(message);
+                Intent mainIntent = new Intent(SubmissionActivity.this, MainActivity.class);
+                SubmissionActivity.this.startActivity(mainIntent);
             }
         });
     }
