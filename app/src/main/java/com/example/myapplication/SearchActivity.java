@@ -39,6 +39,17 @@ public class SearchActivity extends AppCompatActivity implements
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         
         expandableListDetail = ImportDatabase.forList();
+        for (String item: expandableListDetail.keySet()){
+            expandableListDetail.get(item).set(0,"Painting ID: " + expandableListDetail.get(item).get(0));
+            expandableListDetail.get(item).set(1,"Location: " + expandableListDetail.get(item).get(1));
+            expandableListDetail.get(item).set(2,"Location Type / Notes: " + expandableListDetail.get(item).get(2));
+            expandableListDetail.get(item).set(3,"Rack: " + expandableListDetail.get(item).get(3));
+            expandableListDetail.get(item).set(4,"Artist: " + expandableListDetail.get(item).get(4));
+            expandableListDetail.get(item).set(5,"Title: " + expandableListDetail.get(item).get(5));
+            expandableListDetail.get(item).set(6,"Height: " + expandableListDetail.get(item).get(6));
+            expandableListDetail.get(item).set(7,"Width: " + expandableListDetail.get(item).get(7));
+            expandableListDetail.get(item).set(8,"Depth: " + expandableListDetail.get(item).get(8));
+        }
         expandableListTitle = new ArrayList<String>(ImportDatabase.forList().keySet());
         
         searchView = (SearchView) findViewById(R.id.searchBar);
