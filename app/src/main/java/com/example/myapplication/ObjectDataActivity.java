@@ -35,7 +35,7 @@ public class ObjectDataActivity extends AppCompatActivity {
         setContentView(R.layout.activity_object_data);
 
         Intent intent = getIntent();
-        paintingID = intent.getStringExtra("result");
+        paintingID = intent.getStringExtra("paintingID");
 
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
 
@@ -122,7 +122,7 @@ public class ObjectDataActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Intent intent = new Intent(this, MainActivity.class).addFlags(Intent.FLAG_RECEIVER_REPLACE_PENDING);
+        Intent intent = new Intent(this, ObjectDataActivity.class).addFlags(Intent.FLAG_RECEIVER_REPLACE_PENDING);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
@@ -184,9 +184,11 @@ public class ObjectDataActivity extends AppCompatActivity {
             }).setNegativeButton("Continue", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    Intent ObjectDataIntent = new Intent(ObjectDataActivity.this, SubmissionActivity.class);
-                    ObjectDataIntent.putExtra("result", tagContent);
-                    ObjectDataActivity.this.startActivity(ObjectDataIntent);
+                    Intent submissionIntent = new Intent(ObjectDataActivity.this, SubmissionActivity.class);
+                    submissionIntent.putExtra("paintingID", paintingID);
+                    submissionIntent.putExtra("rackID", tagContent);
+
+                    ObjectDataActivity.this.startActivity(submissionIntent);
                 }
             });
             AlertDialog dialog = builder.create();

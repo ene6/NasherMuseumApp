@@ -6,24 +6,27 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="Nasher Scan"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
 
         <activity
             android:name=".RackContentsActivity"
-            android:label="Rack Contents"></activity>
-        <activity
-            android:name=".ScanRackActivity"
-            android:screenOrientation="portrait"
-            android:label="Scan Rack" />
+            android:label="Rack Contents">
+        </activity>
+
         <activity
             android:name=".LoginPageActivity"
             android:screenOrientation="portrait"
             android:label="Login" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+
         <activity
             android:name=".SearchActivity"
             android:screenOrientation="portrait"
@@ -33,14 +36,12 @@
             </intent-filter>
             <meta-data android:name="android.app.searchable"
                 android:resource="@xml/searchable"/>
-
         </activity>
 
         <activity
             android:name=".SubmissionActivity"
             android:screenOrientation="portrait"
             android:label="Submit" >
-
         </activity>
 
 
@@ -50,19 +51,10 @@
             android:label="Object Data">
 
         </activity>
+
         <activity
             android:name=".MainActivity">
             android:screenOrientation="portrait"
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity
@@ -70,8 +62,6 @@
             android:screenOrientation="portrait"
             android:stateNotNeeded="true"
             android:windowSoftInputMode="stateAlwaysHidden" />
-
-
     </application>
 
 </manifest>

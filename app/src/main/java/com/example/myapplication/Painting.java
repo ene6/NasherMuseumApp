@@ -152,7 +152,6 @@ public class Painting {
                     changeRack("None");
                     returnVal[1] = "None";
                 }
-
             }
         }
 

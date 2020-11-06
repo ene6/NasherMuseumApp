@@ -25,7 +25,6 @@ public class SubmissionActivity extends Activity {
         final EditText etOldLocation = (EditText) findViewById(R.id.etOldLocation);
         final EditText etNewLocation = (EditText) findViewById(R.id.etNewLocation);
 
-
         Intent intent = getIntent();
         final String paintingID = intent.getStringExtra("paintingID");
         final String rackID = intent.getStringExtra("rackID");

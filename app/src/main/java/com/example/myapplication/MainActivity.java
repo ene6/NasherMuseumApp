@@ -40,8 +40,11 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Tries to disable the title bar. currently doesn't work lol
-        getSupportActionBar().setDisplayShowHomeEnabled(false);
+        try
+        {
+            this.getSupportActionBar().hide();
+        }
+        catch (NullPointerException e){}
 
         //Connect button variable to xml
         scanButton = findViewById(R.id.scan);
@@ -97,18 +100,7 @@ public class MainActivity extends AppCompatActivity{
                 }).setNegativeButton("Continue", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        if (result.getContents().contains("."))
-                        {
-                            Intent PaintingIntent = new Intent(MainActivity.this, ObjectDataActivity.class);
-                            PaintingIntent.putExtra("result", result.getContents());
-                            MainActivity.this.startActivity(PaintingIntent);
-                        }
-                        else
-                        {
-                            Intent RackIntent = new Intent(MainActivity.this, SearchActivity.class);
-                            RackIntent.putExtra("rackID", result.getContents());
-                            MainActivity.this.startActivity(RackIntent);
-                        }
+                        parseString(result.getContents());
 
                     }
                 });
@@ -189,9 +181,7 @@ public class MainActivity extends AppCompatActivity{
             }).setNegativeButton("Continue", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    Intent ObjectDataIntent = new Intent(MainActivity.this, ObjectDataActivity.class);
-                    ObjectDataIntent.putExtra("result", tagContent);
-                    MainActivity.this.startActivity(ObjectDataIntent);
+                    parseString(tagContent);
                 }
             });
             AlertDialog dialog = builder.create();
@@ -217,6 +207,30 @@ public class MainActivity extends AppCompatActivity{
             Log.e("getTextFromNdefRecord", e.getMessage(), e);
         }
         return tagContent;
+    }
+
+    public void parseString(String contents)
+    {
+        contents = contents.replaceAll("\\s+","");
+
+        if (contents.contains("."))
+        {
+            try {
+                ImportDatabase.info.get(contents).getTitle();
+                Intent PaintingIntent = new Intent(MainActivity.this, ObjectDataActivity.class);
+                PaintingIntent.putExtra("paintingID", contents);
+                MainActivity.this.startActivity(PaintingIntent);
+            } catch (Exception e) {
+                Toast.makeText(this, "Incorrect ID? No Painting Found", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+        else
+        {
+                Intent RackIntent = new Intent(MainActivity.this, SearchActivity.class);
+                RackIntent.putExtra("rackID", contents);
+                MainActivity.this.startActivity(RackIntent);
+        }
     }
 
 }
