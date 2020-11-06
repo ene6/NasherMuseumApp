@@ -35,7 +35,47 @@ public class ImportDatabase {
     public static HashMap<String, Painting> info;
     public static HashMap<String, List<String>> infoList;
 
+    public static boolean updatePaintingCSV = false;
+
     private static boolean initialized = false;
+
+    public static void createCSV(Context context, String CSV_FILE_PATH) {
+        //String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+        //requestPermissions(permissions,PERMISSION_REQUEST_CODE);
+
+        // FOR EXTERNAL STORAGE: String baseDir = android.os.Environment.getExternalStorageDirectory().getAbsolutePath();
+        // FOR INTERNAL STORAGE: String baseDir = context.getFilesDir().getAbsolutePath();
+        String baseDir = context.getFilesDir().getAbsolutePath();;
+        String filePath = baseDir + File.separator + CSV_FILE_PATH;
+        File f = new File(filePath);
+        CSVWriter writer;
+
+        // File exist
+        try {
+            if (f.exists() && !f.isDirectory()) {
+                //f.delete();
+                Log.d("test1", "EXISTS");
+                return;
+            }
+            writer = new CSVWriter(new FileWriter(filePath));
+            CSVReader csvReader = new CSVReader(new InputStreamReader(context.getAssets().open(CSV_FILE_PATH)));
+            String[] values;
+            Log.d("test1", "CREATED");
+            while ((values = csvReader.readNext()) != null) {
+                //Log.d("Output",Arrays.toString(values));
+                writer.writeNext(values);
+            }
+            writer.close();
+
+
+        } catch (IOException | CsvValidationException e) {
+            e.printStackTrace();
+            Log.d("test1", "Fail");
+            Log.d("test1", e.toString());
+        }
+
+    }
+
 
     public static void create(Context context, String CSV_FILE_PATH) {
         if (!initialized) {
@@ -44,8 +84,8 @@ public class ImportDatabase {
             info = new HashMap<String, Painting>();
             infoList = new HashMap<String, List<String>>();
             ArrayList<List<String>> records = new ArrayList<List<String>>();
-
-            try (CSVReader csvReader = new CSVReader(new InputStreamReader(context.getAssets().open(CSV_FILE_PATH)))) {
+            createCSV(context, CSV_FILE_PATH);
+            try (CSVReader csvReader = new CSVReader(new FileReader(context.getFilesDir().getAbsolutePath() + File.separator + CSV_FILE_PATH))) {
                 String[] values;
                 while ((values = csvReader.readNext()) != null) {
                     records.add(Arrays.asList(values));
@@ -145,7 +185,7 @@ public class ImportDatabase {
         returnVal.addAll(searchID(keyword));
         returnVal.addAll(searchTitle(keyword));
         returnVal.addAll(searchArtist(keyword));
-        returnVal.addAll(searchLocation(true,keyword)); //go back and made this always searched through - also clean up all the redundancies in the searching algos
+        returnVal.addAll(searchLocation(true, keyword)); //go back and made this always searched through - also clean up all the redundancies in the searching algos
 
         if (keyword.toLowerCase().contains("screen")) {
             for (int i = 0; i < keyword.split(" ").length; i++) {
@@ -179,6 +219,24 @@ public class ImportDatabase {
         Log.d("ID", paintingID);
         Log.d("Line1", info.get(paintingID).getLocationType() + "\t" + info.get(paintingID).getRack());
         Log.d("Line2", infoList.get(paintingID).get(2) + "\t" + infoList.get(paintingID).get(3));
+    }
+
+    public static void editCSVCell(Context context, String CSV_FILE_PATH){
+        String baseDir = context.getFilesDir().getAbsolutePath();
+        String filePath = baseDir + File.separator + CSV_FILE_PATH;
+        //File f = new File(filePath);
+        //f.delete();
+        try {
+            CSVWriter writer = new CSVWriter(new FileWriter(filePath, false));
+            for (String id: info.keySet()){
+                String[] data = {info.get(id).getPaintingID(), info.get(id).getLocation(), info.get(id).getLocationType(), info.get(id).getRack(), info.get(id).getArtist(), info.get(id).getTitle(), info.get(id).getHeight(), info.get(id).getWidth(), info.get(id).getDepth()};
+                //Log.d("Input",Arrays.toString(data));
+                writer.writeNext(data);
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

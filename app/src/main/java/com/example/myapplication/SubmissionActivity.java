@@ -47,6 +47,7 @@ public class SubmissionActivity extends Activity {
                         "Email Sent!",
                         Toast.LENGTH_LONG).show();
                 ImportDatabase.changeLoc(paintingID, etNewLocation.getText().toString());
+                ImportDatabase.updatePaintingCSV = true;
                 new MyTask().execute(message);
                 Intent mainIntent = new Intent(SubmissionActivity.this, MainActivity.class);
                 SubmissionActivity.this.startActivity(mainIntent);

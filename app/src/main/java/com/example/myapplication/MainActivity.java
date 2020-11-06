@@ -1,15 +1,20 @@
 package com.example.myapplication;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
@@ -26,25 +31,31 @@ import java.io.UnsupportedEncodingException;
 
 import static android.view.Window.FEATURE_NO_TITLE;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
 
     Button scanButton;
     Button searchButton;
     NfcAdapter nfcAdapter;
+    private static final String CSV_FILE_PATH = "nasher_clean_info.csv";
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         //Database initialization
-        ImportDatabase.create(this, "nasher_clean_info.csv");
+        ImportDatabase.create(this, CSV_FILE_PATH);
+        if (ImportDatabase.updatePaintingCSV) {
+            ImportDatabase.editCSVCell(this, CSV_FILE_PATH);
+            ImportDatabase.updatePaintingCSV = false;
+        }
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        try
-        {
+        try {
             this.getSupportActionBar().hide();
+        } catch (NullPointerException e) {
         }
-        catch (NullPointerException e){}
 
         //Connect button variable to xml
         scanButton = findViewById(R.id.scan);
@@ -85,8 +96,8 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if (result != null){
-            if (result.getContents() != null){
+        if (result != null) {
+            if (result.getContents() != null) {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -106,11 +117,10 @@ public class MainActivity extends AppCompatActivity{
                 });
                 AlertDialog dialog = builder.create();
                 dialog.show();
-            }
-            else {
+            } else {
                 Toast.makeText(this, "No results", Toast.LENGTH_LONG).show();
             }
-        }else {
+        } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
@@ -146,10 +156,9 @@ public class MainActivity extends AppCompatActivity{
 
             Parcelable[] parcelables = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
 
-            if(parcelables != null && parcelables.length > 0)
-            {
+            if (parcelables != null && parcelables.length > 0) {
                 readTextFromMessage((NdefMessage) parcelables[0]);
-            }else{
+            } else {
                 Toast.makeText(this, "Empty Tag? No text found", Toast.LENGTH_SHORT).show();
             }
 
@@ -161,7 +170,7 @@ public class MainActivity extends AppCompatActivity{
 
         NdefRecord[] ndefRecords = ndefMessage.getRecords();
 
-        if(ndefRecords != null && ndefRecords.length>0){
+        if (ndefRecords != null && ndefRecords.length > 0) {
 
             NdefRecord ndefRecord = ndefRecords[0];
 
@@ -187,15 +196,13 @@ public class MainActivity extends AppCompatActivity{
             AlertDialog dialog = builder.create();
             dialog.show();
 
-        }else
-        {
+        } else {
             Toast.makeText(this, "No NDEF records found!", Toast.LENGTH_SHORT).show();
         }
     }
 
     //Parses the string from the ndef record
-    public String getTextFromNdefRecord(NdefRecord ndefRecord)
-    {
+    public String getTextFromNdefRecord(NdefRecord ndefRecord) {
         String tagContent = null;
         try {
             byte[] payload = ndefRecord.getPayload();
@@ -209,12 +216,10 @@ public class MainActivity extends AppCompatActivity{
         return tagContent;
     }
 
-    public void parseString(String contents)
-    {
-        contents = contents.replaceAll("\\s+","");
+    public void parseString(String contents) {
+        contents = contents.replaceAll("\\s+", "");
 
-        if (contents.contains("."))
-        {
+        if (contents.contains(".")) {
             try {
                 ImportDatabase.info.get(contents).getTitle();
                 Intent PaintingIntent = new Intent(MainActivity.this, ObjectDataActivity.class);
@@ -224,12 +229,10 @@ public class MainActivity extends AppCompatActivity{
                 Toast.makeText(this, "Incorrect ID? No Painting Found", Toast.LENGTH_SHORT).show();
             }
 
-        }
-        else
-        {
-                Intent RackIntent = new Intent(MainActivity.this, SearchActivity.class);
-                RackIntent.putExtra("rackID", contents);
-                MainActivity.this.startActivity(RackIntent);
+        } else {
+            Intent RackIntent = new Intent(MainActivity.this, SearchActivity.class);
+            RackIntent.putExtra("rackID", contents);
+            MainActivity.this.startActivity(RackIntent);
         }
     }
 
