@@ -41,7 +41,8 @@ public class SubmissionActivity extends Activity {
 
         send.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                String message = "New move for painting: " +  paintingName + " (" + etPaintingID.getText() + ") from " + paintingLocation + " to " + etNewLocation.getText() + ".";
+                String message = "New move for painting: " +  paintingName + " (" + etPaintingID.getText() + ") from " + paintingLocation + " to "
+                        + etNewLocation.getText() + ". Move requested by: " + Users.getInstance().getFirst() + " " + Users.getInstance().getLast();;
 
                 Toast.makeText(getApplicationContext(),
                         "Email Sent!",

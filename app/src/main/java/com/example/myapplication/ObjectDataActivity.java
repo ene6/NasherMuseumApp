@@ -67,6 +67,7 @@ public class ObjectDataActivity extends AppCompatActivity {
                 Intent submissionIntent = new Intent(ObjectDataActivity.this, SubmissionActivity.class);
                 submissionIntent.putExtra("paintingID", paintingID);
 
+
                 ObjectDataActivity.this.startActivity(submissionIntent);            }
         });
 
@@ -100,11 +101,7 @@ public class ObjectDataActivity extends AppCompatActivity {
                 }).setNegativeButton("Continue", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                            Intent submissionIntent = new Intent(ObjectDataActivity.this, SubmissionActivity.class);
-                                submissionIntent.putExtra("paintingID", paintingID);
-                                submissionIntent.putExtra("rackID", result.getContents());
-
-                            ObjectDataActivity.this.startActivity(submissionIntent);
+                        parseString(result.getContents());
                     }
                 });
                 AlertDialog dialog = builder.create();
@@ -184,11 +181,7 @@ public class ObjectDataActivity extends AppCompatActivity {
             }).setNegativeButton("Continue", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    Intent submissionIntent = new Intent(ObjectDataActivity.this, SubmissionActivity.class);
-                    submissionIntent.putExtra("paintingID", paintingID);
-                    submissionIntent.putExtra("rackID", tagContent);
-
-                    ObjectDataActivity.this.startActivity(submissionIntent);
+                    parseString(tagContent);
                 }
             });
             AlertDialog dialog = builder.create();
@@ -214,6 +207,20 @@ public class ObjectDataActivity extends AppCompatActivity {
             Log.e("getTextFromNdefRecord", e.getMessage(), e);
         }
         return tagContent;
+    }
+
+    public void parseString(String contents) {
+        contents = contents.replaceAll("\\s+", "");
+
+        if (contents.contains(".")) {
+            Toast.makeText(this, "Painting ID? Please scan a rack instead.", Toast.LENGTH_SHORT).show();
+
+        } else {
+            Intent submissionIntent = new Intent(ObjectDataActivity.this, SubmissionActivity.class);
+            submissionIntent.putExtra("paintingID", paintingID);
+            submissionIntent.putExtra("rackID", contents);
+            ObjectDataActivity.this.startActivity(submissionIntent);
+        }
     }
 
 

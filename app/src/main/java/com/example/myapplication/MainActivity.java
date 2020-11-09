@@ -36,6 +36,11 @@ public class MainActivity extends AppCompatActivity {
     Button scanButton;
     Button searchButton;
     NfcAdapter nfcAdapter;
+    TextView tvWelcome;
+
+    String fName;
+    String lName;
+
     private static final String CSV_FILE_PATH = "nasher_clean_info.csv";
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -49,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
             ImportDatabase.updatePaintingCSV = false;
         }
 
+        //Log.d("Bub",Users.getInstance().getPass());
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -57,9 +64,15 @@ public class MainActivity extends AppCompatActivity {
         } catch (NullPointerException e) {
         }
 
+        fName = Users.getInstance().getFirst();
+        lName = Users.getInstance().getLast();
+
         //Connect button variable to xml
         scanButton = findViewById(R.id.scan);
         searchButton = findViewById(R.id.searchPage);
+        tvWelcome = findViewById(R.id.tvWelcome);
+
+        tvWelcome.setText("Welcome " + fName + " " + lName +"!");
 
         //Nfc Adapter
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
@@ -77,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent searchIntent = new Intent(MainActivity.this, SearchActivity.class);
+                searchIntent.putExtra("fName", fName);
+                searchIntent.putExtra("lName", lName);
                 MainActivity.this.startActivity(searchIntent);
             }
         });
