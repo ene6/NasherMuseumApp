@@ -3,14 +3,12 @@ package com.example.myapplication;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
-import android.Manifest;
 import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
+import android.graphics.drawable.AnimationDrawable;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
@@ -19,8 +17,8 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,14 +27,15 @@ import com.google.zxing.integration.android.IntentResult;
 
 import java.io.UnsupportedEncodingException;
 
-import static android.view.Window.FEATURE_NO_TITLE;
-
 public class MainActivity extends AppCompatActivity {
-
-    Button scanButton;
-    Button searchButton;
+    //Variable initialization
+    Button btScan;
+    Button btSearch;
     NfcAdapter nfcAdapter;
     TextView tvWelcome;
+    TextView tvNFC;
+    AnimationDrawable nfcAnimation;
+    ImageView nfcImage;
 
     String fName;
     String lName;
@@ -54,31 +53,49 @@ public class MainActivity extends AppCompatActivity {
             ImportDatabase.updatePaintingCSV = false;
         }
 
-        //Log.d("Bub",Users.getInstance().getPass());
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Hides the action bar
         try {
             this.getSupportActionBar().hide();
         } catch (NullPointerException e) {
         }
 
+        //Gets user's name
         fName = Users.getInstance().getFirst();
         lName = Users.getInstance().getLast();
 
         //Connect button variable to xml
-        scanButton = findViewById(R.id.scan);
-        searchButton = findViewById(R.id.searchPage);
+        btScan = findViewById(R.id.btScan);
+        btSearch = findViewById(R.id.btSearch);
         tvWelcome = findViewById(R.id.tvWelcome);
+        tvNFC = findViewById(R.id.tvNFC);
+        nfcImage = findViewById(R.id.ivAnimation);
+        nfcImage.setBackgroundResource(R.drawable.nfc);
 
+        //Sets the welcome text for the user
         tvWelcome.setText("Welcome " + fName + " " + lName +"!");
 
-        //Nfc Adapter
+        //Checks if NFC is enabled or not on the phone. Sets up animations/pictures accordingly
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
 
+        if (nfcAdapter != null && nfcAdapter.isEnabled())
+        {
+            nfcAnimation = (AnimationDrawable) nfcImage.getBackground();
+            nfcAnimation.setExitFadeDuration(75);
+            nfcAnimation.start();
+            tvNFC.setText("NFC Scanner On!");
+        }
+        else
+        {
+            nfcImage.setBackgroundResource(R.drawable.scandisable);
+            tvNFC.setText("NFC Disabled");
+
+        }
+
         //Scan button that brings up the scanning activity
-        scanButton.setOnClickListener(new View.OnClickListener() {
+        btScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 scanID();
@@ -86,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //Search button listener that goes to the search activity
-        searchButton.setOnClickListener(new View.OnClickListener() {
+        btSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent searchIntent = new Intent(MainActivity.this, SearchActivity.class);
