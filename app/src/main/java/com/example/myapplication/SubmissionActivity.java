@@ -18,7 +18,7 @@ public class SubmissionActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submission);
 
-        final Button send = (Button) this.findViewById(R.id.submitBtn);
+        final Button send = (Button) findViewById(R.id.submitBtn);
         final EditText etPaintingID = (EditText) findViewById(R.id.etObjectID);
         final EditText etName = (EditText) findViewById(R.id.etName);
         final EditText etArtist = (EditText) findViewById(R.id.etArtist);
