@@ -111,6 +111,7 @@ public class SearchActivity extends AppCompatActivity implements
             @Override
             public boolean onChildClick(ExpandableListView parent, View v,
                                         int groupPosition, int childPosition, long id) {
+                /*
                 Toast.makeText(
                         getApplicationContext(),
                         expandableListTitle.get(groupPosition)
@@ -118,7 +119,7 @@ public class SearchActivity extends AppCompatActivity implements
                                 + expandableListDetail.get(
                                 expandableListTitle.get(groupPosition)).get(
                                 childPosition), Toast.LENGTH_SHORT
-                ).show();
+                ).show(); */
 
                 Intent SubmissionIntent = new Intent(SearchActivity.this, SubmissionActivity.class);
                 SubmissionIntent.putExtra("paintingID",expandableListTitle.get(groupPosition));
