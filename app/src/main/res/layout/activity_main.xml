@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/btScan"
+        android:id="@+id/scan"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -32,7 +32,7 @@
 
 
     <Button
-        android:id="@+id/btSearch"
+        android:id="@+id/searchPage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -49,7 +49,7 @@
         app:backgroundTint="#6C6C6C"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btScan"
+        app:layout_constraintTop_toBottomOf="@+id/scan"
         app:strokeColor="#96d607"
         app:strokeWidth="4dp" />
 
@@ -83,31 +83,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-    <ImageView
-        android:id="@+id/ivAnimation"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toStartOf="@+id/tvNFC"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btSearch"
-        app:srcCompat="@drawable/nfc" />
-
-    <TextView
-        android:id="@+id/tvNFC"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:fontFamily="@font/helvetica_neue_light"
-        android:text="TextView"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="@+id/ivAnimation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ivAnimation"
-        app:layout_constraintTop_toTopOf="@+id/ivAnimation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

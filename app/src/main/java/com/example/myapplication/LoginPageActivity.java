@@ -39,6 +39,7 @@ public class LoginPageActivity extends AppCompatActivity {
         catch (NullPointerException e){}
 
 
+
         /*
         try {
             CSVReader csvReader = new CSVReader(new InputStreamReader(this.getAssets().open("user.csv")));

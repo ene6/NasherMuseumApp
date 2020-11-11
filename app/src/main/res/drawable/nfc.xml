@@ -1,7 +1,0 @@
-<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
-    android:oneshot="false">
-    <item android:drawable="@drawable/scan0" android:duration="1000" />
-    <item android:drawable="@drawable/scan1" android:duration="1000" />
-    <item android:drawable="@drawable/scan2" android:duration="1000" />
-    <item android:drawable="@drawable/scan3" android:duration="1000" />
-</animation-list>
