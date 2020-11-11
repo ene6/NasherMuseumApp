@@ -77,10 +77,10 @@ public class SubmissionActivity extends Activity {
 
 
                 GMailSender sender = new GMailSender("nasherstorage", "EGR101F20");
-                sender.sendMail("This is Subject",
+                sender.sendMail("Nasher Storage Update",
                         message,
                         "nasherstorage",
-                        "shinyswampert123@gmail.com");
+                        "nasherstoragelog@gmail.com");
 
                 Log.i("Send Mail", "Email Sent");
 
