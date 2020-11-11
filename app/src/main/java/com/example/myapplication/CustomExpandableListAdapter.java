@@ -122,7 +122,6 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
             expandableListTitle.addAll(originalList);
         }
         else {
-
             expandableListTitle.addAll(ImportDatabase.search(query));
         }
 
