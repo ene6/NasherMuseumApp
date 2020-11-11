@@ -5,6 +5,8 @@ import android.util.Log;
 import java.lang.reflect.Array;
 
 public class Painting {
+
+    //Declare private variables
     private String paintingID;
     private String location;
     private String locationType;
@@ -15,7 +17,15 @@ public class Painting {
     private String width;
     private String depth;
 
+
+    /**
+     *
+     * @param paintingID ID associated with Nasher paintings
+     * @param info Array containing information that charactarizes paintings
+     */
     public Painting(String paintingID, String[] info){
+
+        //Initialize private variables
         this.paintingID = paintingID.trim();
         this.location = info[0].trim();
         this.locationType = info[1].trim();
@@ -38,6 +48,7 @@ public class Painting {
 
     }
 
+    //Define accessor methods for painting charactaristics
     public String getPaintingID() {
         return paintingID;
     }
@@ -74,15 +85,31 @@ public class Painting {
         return depth;
     }
 
+
+    /**
+     * Checks if the Object Painting ID contains the given keyword
+     * @param paintingID keyword to check
+     * @return True if true, False if false
+     */
     public boolean containsPaintingID(String paintingID){
         //Log.d("Testing", nasher.searchID("20").toString());
         return this.paintingID.trim().toLowerCase().contains(paintingID.trim().toLowerCase());
     }
 
+    /**
+     * Checks if Object locationType contains the given keyword
+     * @param locationType keyword to check
+     * @return True if true, False if false
+     */
     public boolean isLocationType(String locationType){
         return this.locationType.trim().toLowerCase().contains(locationType.trim().toLowerCase());
     }
 
+    /**
+     * Checks if Object rack is the same as the given keyword
+     * @param rack keyword to check
+     * @return True if true, False if false
+     */
     public boolean isRack(String rack){
         try {
             Integer.parseInt(rack);
@@ -97,22 +124,45 @@ public class Painting {
         return this.rack.toLowerCase().trim().equals(rack.toLowerCase().trim());
     }
 
+    /**
+     * Checks if Object artist contains the same as the given keyword
+     * @param artist keyword
+     * @return True if true, False if false
+     */
     public boolean containsArtist(String artist){
         return this.artist.trim().toLowerCase().contains(artist.trim().toLowerCase());
     }
 
+    /**
+     * Checks if the Object title contains the given keyword
+     * @param title keyword
+     * @return True if true, False if false
+     */
     public boolean containsTitle(String title){
         return this.title.trim().toLowerCase().contains(title.trim().toLowerCase());
     }
 
+    /**
+     * Edits the Object locationType to given parameter
+     * @param locationType new locationType
+     */
     public void changeLocationType (String locationType){
         this.locationType = locationType;
     }
 
+    /**
+     * Edits the Object rack to be given parameter
+     * @param rack new rack
+     */
     public void changeRack (String rack){
         this.rack = rack;
     }
 
+    /**
+     * Edits the location, locationType, rack to reflect given parameter
+     * @param newLoc the new location to be updated to
+     * @return 2 cell array where the first cell is new locationType and second is rack
+     */
     public String[] changeLoc (String newLoc) {
         String[] returnVal = new String[2];
         if (newLoc.toLowerCase().trim().contains("wall")){
@@ -159,6 +209,9 @@ public class Painting {
         return returnVal;
     }
 
+    /**
+     * Update locationType with proper formatting
+     */
     private void updateLocation(){
         if (this.rack == "None"){
             this.location = this.locationType;
@@ -178,6 +231,8 @@ public class Painting {
 }
 
 /*
+Other potentially useful statements
+
 
 ImportDatabase.create(this,"nasher_clean_info.csv")
 ImportDatabase.info.get(--paintinID--).getTitle();
