@@ -49,7 +49,7 @@ public class SubmissionActivity extends Activity {
                         Toast.LENGTH_LONG).show();
                 ImportDatabase.changeLoc(paintingID, etNewLocation.getText().toString());
                 ImportDatabase.updatePaintingCSV = true;
-                new MyTask().execute(message);
+                new MyTask().execute(message, etPaintingID.getText().toString());
                 Intent mainIntent = new Intent(SubmissionActivity.this, MainActivity.class);
                 SubmissionActivity.this.startActivity(mainIntent);
             }
@@ -77,7 +77,7 @@ public class SubmissionActivity extends Activity {
 
 
                 GMailSender sender = new GMailSender("nasherstorage", "EGR101F20");
-                sender.sendMail("Nasher Storage Update",
+                sender.sendMail("Update for Painting: " + params[1],
                         message,
                         "nasherstorage",
                         "nasherstoragelog@gmail.com");
