@@ -25,7 +25,7 @@ public class LoginPageActivity extends AppCompatActivity {
 
     Map<String, String[]> users = new HashMap<String, String[]>();
 
-    ;@Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Sets the xml file

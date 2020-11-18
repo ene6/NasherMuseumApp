@@ -7,15 +7,15 @@ import java.lang.reflect.Array;
 public class Painting {
 
     //Declare private variables
-    private String paintingID;
+    private final String paintingID;
     private String location;
     private String locationType;
     private String rack;
-    private String artist;
-    private String title;
-    private String height;
-    private String width;
-    private String depth;
+    private final String artist;
+    private final String title;
+    private final String height;
+    private final String width;
+    private final String depth;
 
 
     /**

@@ -14,7 +14,6 @@ public class SubmissionActivity extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Log.d("Bub","Hello World");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submission);
 
@@ -42,7 +41,7 @@ public class SubmissionActivity extends Activity {
         send.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String message = "New move for painting: " +  paintingName + " (" + etPaintingID.getText() + ") from " + paintingLocation + " to "
-                        + etNewLocation.getText() + ". Move requested by: " + Users.getInstance().getFirst() + " " + Users.getInstance().getLast();;
+                        + etNewLocation.getText() + ". Move requested by: " + Users.getInstance().getFirst() + " " + Users.getInstance().getLast();
 
                 Toast.makeText(getApplicationContext(),
                         "Email Sent!",

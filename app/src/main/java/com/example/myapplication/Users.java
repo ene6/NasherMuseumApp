@@ -4,8 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Users {
+    //Kind of crappy way to have a login system but hey it works
     Map<String, String[]> users = new HashMap<String, String[]>();
 
+    //Singleton class instantiation
     private static Users instance;
 
     public static Users getInstance() {
@@ -35,6 +37,7 @@ public class Users {
         return users.get(val)[2];
     }
 
+    //Puts the database of users when user first logins
     public void setValue(String value) {
         this.val = value.toLowerCase();
         users.put("ayc21", new String[]{"OCEAN", "Annabelle", "Chu"});

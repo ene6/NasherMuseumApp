@@ -37,7 +37,8 @@ public class SearchActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_search);
 
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        
+
+        //Puts the field title before every field in the list
         expandableListDetail = ImportDatabase.forList();
         for (String item: expandableListDetail.keySet()){
             if (!expandableListDetail.get(item).get(0).contains("Painting ID"))
@@ -65,9 +66,9 @@ public class SearchActivity extends AppCompatActivity implements
 
         searchView.setIconifiedByDefault(false);
 
+        //Gets the rackID from the previous activity if a rack was scanned in
         Intent intent = getIntent();
         final String rackID = intent.getStringExtra("rackID");
-
 
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 
@@ -78,54 +79,20 @@ public class SearchActivity extends AppCompatActivity implements
         expandableListAdapter = new CustomExpandableListAdapter(this, expandableListTitle, expandableListDetail);
         expandableListView.setAdapter(expandableListAdapter);
 
+        //If a rackID was scanned in, it is populated automatically in the searchbar with everything expanded
         if (rackID != null && !rackID.isEmpty())
         {
             searchView.setQuery(rackID, true);
         }
 
-
-        //expandAll();
-        /*
-        expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-
-            @Override
-            public void onGroupExpand(int groupPosition) {
-                Toast.makeText(getApplicationContext(),
-                        expandableListTitle.get(groupPosition) + " List Expanded.",
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
-
-            @Override
-            public void onGroupCollapse(int groupPosition) {
-                Toast.makeText(getApplicationContext(),
-                        expandableListTitle.get(groupPosition) + " List Collapsed.",
-                        Toast.LENGTH_SHORT).show();
-
-            }
-        }); */
-
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v,
                                         int groupPosition, int childPosition, long id) {
-                /*
-                Toast.makeText(
-                        getApplicationContext(),
-                        expandableListTitle.get(groupPosition)
-                                + " -> "
-                                + expandableListDetail.get(
-                                expandableListTitle.get(groupPosition)).get(
-                                childPosition), Toast.LENGTH_SHORT
-                ).show(); */
 
                 Intent SubmissionIntent = new Intent(SearchActivity.this, SubmissionActivity.class);
                 SubmissionIntent.putExtra("paintingID",expandableListTitle.get(groupPosition));
                 SearchActivity.this.startActivity(SubmissionIntent);
-
-
 
                 return false;
             }
@@ -159,6 +126,7 @@ public class SearchActivity extends AppCompatActivity implements
         return false;
     }
 
+    //Nice feature that expands all of the listviews when enter/submit is hit
     @Override
     public boolean onQueryTextSubmit(String query) {
         expandableListAdapter.filterData(query);

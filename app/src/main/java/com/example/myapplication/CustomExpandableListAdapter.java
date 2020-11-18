@@ -18,9 +18,9 @@ import android.widget.TextView;
 public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
 
     //Variable initialization
-    private Context context;
-    private List<String> expandableListTitle;
-    private HashMap<String, List<String>> expandableListDetail;
+    private final Context context;
+    private final List<String> expandableListTitle;
+    private final HashMap<String, List<String>> expandableListDetail;
     public List<String> originalList;
     private String query;
 
@@ -99,8 +99,6 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
         return convertView;
     }
 
-
-
     @Override
     public boolean hasStableIds() {
         return false;
@@ -115,7 +113,6 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
         this.query = query;
 
         query = query.toLowerCase();
-        //Log.v("MyListAdapter", String.valueOf(continentList.size()));
         expandableListTitle.clear();
 
         if(query.isEmpty()){
@@ -124,8 +121,6 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
         else {
             expandableListTitle.addAll(ImportDatabase.search(query));
         }
-
-        //Log.v("MyListAdapter", String.valueOf(continentList.size()));
         notifyDataSetChanged();
 
     }

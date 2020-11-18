@@ -22,10 +22,10 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class GMailSender extends javax.mail.Authenticator {
-    private String mailhost = "smtp.gmail.com";
-    private String user;
-    private String password;
-    private Session session;
+    private final String mailhost = "smtp.gmail.com";
+    private final String user;
+    private final String password;
+    private final Session session;
 
     static {
         Security.addProvider(new com.example.myapplication.JSSEProvider());
@@ -48,7 +48,7 @@ public class GMailSender extends javax.mail.Authenticator {
 
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("nasherstorage", "EGR101F20");
+                return new PasswordAuthentication("", "");
             }
 
         });
@@ -77,7 +77,7 @@ public class GMailSender extends javax.mail.Authenticator {
     }
 
     public class ByteArrayDataSource implements DataSource {
-        private byte[] data;
+        private final byte[] data;
         private String type;
 
         public ByteArrayDataSource(byte[] data, String type) {

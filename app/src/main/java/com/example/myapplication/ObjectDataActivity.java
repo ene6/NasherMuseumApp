@@ -28,17 +28,19 @@ public class ObjectDataActivity extends AppCompatActivity {
     String paintingID;
     NfcAdapter nfcAdapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_object_data);
 
+        //Gets the paintingID from the previous activity
         Intent intent = getIntent();
         paintingID = intent.getStringExtra("paintingID");
 
+        //Starts the nfc adapter for scanning of NFC tags
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
 
+        //Linking of xml entities to variables
         Button moveButton = findViewById(R.id.btMoving);
         Button returnButton = findViewById(R.id.btReturning);
 
@@ -49,11 +51,13 @@ public class ObjectDataActivity extends AppCompatActivity {
 
         ImportDatabase.create(this,"nasher_clean_info.csv");
 
+        //Sets the text to the various variables
         ID.setText(paintingID);
         name.setText(ImportDatabase.info.get(paintingID).getTitle());
         artist.setText(ImportDatabase.info.get(paintingID).getArtist());
         location.setText(ImportDatabase.info.get(paintingID).getLocation());
 
+        //Starts the scan page
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,13 +65,13 @@ public class ObjectDataActivity extends AppCompatActivity {
             }
         });
 
+        //Goes to the submission page
         moveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Intent that passes the paintingID and goes to the submission page
                 Intent submissionIntent = new Intent(ObjectDataActivity.this, SubmissionActivity.class);
                 submissionIntent.putExtra("paintingID", paintingID);
-
-
                 ObjectDataActivity.this.startActivity(submissionIntent);            }
         });
 
@@ -222,7 +226,4 @@ public class ObjectDataActivity extends AppCompatActivity {
             ObjectDataActivity.this.startActivity(submissionIntent);
         }
     }
-
-
-
 }
